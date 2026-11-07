@@ -1,0 +1,34 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: dist/ is built from src/
+        run: git diff --exit-code dist/ || (echo "::error::Run npm run build and commit dist/" && exit 1)
+  # runs the action itself as a user would, without sending anything
+  self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: post
+        uses: ./
+        with:
+          api-key: rs_dry_run_only
+          profile: demo
+          platforms: x, linkedin, bluesky
+          text: Dry run from ${{ github.repository }}@${{ github.sha }}
+          dry-run: true
+      - run: test "${{ steps.post.outputs.status }}" = "dry-run"

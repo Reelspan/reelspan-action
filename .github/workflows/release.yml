@@ -1,0 +1,23 @@
+# On a published release (tag v1.2.3): checks dist/ and moves the major tag (v1) to it, so `uses: Reelspan/reelspan-action@v1`
+# gets the update. Tick "Publish this Action to the GitHub Marketplace" when drafting the release to list it.
+name: Release
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+jobs:
+  major-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci && npm test && git diff --exit-code dist/
+      - name: Move the major tag
+        run: |
+          major="${GITHUB_REF_NAME%%.*}"
+          git tag -f "$major" "$GITHUB_REF_NAME"
+          git push -f origin "refs/tags/$major"

@@ -1,0 +1,91 @@
+name: Reelspan Social Publisher
+description: Publish videos, photos, text or PDFs to TikTok, YouTube, Instagram, X, LinkedIn, Bluesky and 16 more networks.
+author: Reelspan
+branding:
+  icon: send
+  color: purple
+inputs:
+  api-key:
+    description: Your Reelspan API key. Store it as a secret, e.g. secrets.REELSPAN_API_KEY.
+    required: true
+  profile:
+    description: The profile username whose connected accounts post.
+    required: true
+  platforms:
+    description: Networks, comma- or newline-separated (tiktok, youtube, instagram, facebook, x, threads, linkedin, pinterest, bluesky, reddit, mastodon, discord, telegram, slack, …).
+    required: true
+  type:
+    description: video, photos, text or document. Detected from the media's file extensions when left out.
+    required: false
+  text:
+    description: The caption, the post text or the YouTube title. Long text becomes a thread on X and Bluesky.
+    required: false
+  description:
+    description: A longer description where the network has one (YouTube, Pinterest, Reddit, LinkedIn documents).
+    required: false
+  media:
+    description: Repository paths or public URLs (Drive and Dropbox links work), comma- or newline-separated. Photos post as a carousel in order.
+    required: false
+  thumbnail:
+    description: A video thumbnail, repository path or URL.
+    required: false
+  alt-text:
+    description: Alt text for each photo, one per line, in order.
+    required: false
+  scheduled-date:
+    description: Publish later, ISO-8601 (2026-12-01T09:00:00Z, or a local time with the timezone input).
+    required: false
+  timezone:
+    description: IANA timezone for scheduled-date, e.g. Europe/Berlin.
+    required: false
+  add-to-queue:
+    description: Take the profile's next free queue slot instead of posting now.
+    required: false
+    default: 'false'
+  first-comment:
+    description: Posted as the first comment.
+    required: false
+  external-id:
+    description: Your own id for the post, echoed in webhooks and history (e.g. the release tag).
+    required: false
+  extra:
+    description: Any other API fields, as a JSON object or key=value lines (e.g. privacy_level=PUBLIC_TO_EVERYONE). Upload-Post field names work too.
+    required: false
+  wait:
+    description: Wait until every network has finished and report each result.
+    required: false
+    default: 'true'
+  wait-timeout:
+    description: Seconds to wait (default 600).
+    required: false
+    default: '600'
+  fail-on:
+    description: When the step fails. any (a network failed), all (every network failed) or none.
+    required: false
+    default: any
+  idempotency-key:
+    description: Posting twice with the same key publishes once. Defaults to one key per workflow step and run, so re-running a job never double-posts (and retries only the networks that failed).
+    required: false
+  dry-run:
+    description: Log what would be sent and send nothing.
+    required: false
+    default: 'false'
+  base-url:
+    description: API base URL (default https://api.reelspan.com).
+    required: false
+outputs:
+  request-id:
+    description: The request id (look it up with reelspan status).
+  job-id:
+    description: The scheduled job id, for a scheduled or queued post.
+  status:
+    description: completed, partial, failed, scheduled, accepted or dry-run.
+  post-urls:
+    description: 'A JSON object of network to post URL, e.g. {"x":"https://x.com/…"}.'
+  failed-platforms:
+    description: Comma-separated networks that failed.
+  results:
+    description: Each network's full result as a JSON array.
+runs:
+  using: node24
+  main: dist/index.js
