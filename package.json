@@ -2,7 +2,7 @@
   "name": "reelspan-action",
   "version": "1.0.0",
   "private": true,
-  "description": "GitHub Action: publish to 22 social networks with Reelspan.",
+  "description": "GitHub Action: publish to every major social network with Reelspan.",
   "license": "MIT",
   "type": "module",
   "engines": {

@@ -1,4 +1,4 @@
-// Reelspan GitHub Action: publish a release note, a demo video or a changelog card to 22 social networks from a
+// Reelspan GitHub Action: publish a release note, a demo video or a changelog card to every major social network from a
 // workflow. No @actions/* dependencies: inputs come from INPUT_* variables and outputs go to $GITHUB_OUTPUT.
 import { appendFileSync, existsSync, readFileSync, statSync } from 'node:fs';
 import { basename, extname, resolve } from 'node:path';

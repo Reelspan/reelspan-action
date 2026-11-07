@@ -1,7 +1,7 @@
 # Reelspan Social Publisher
 
 A GitHub Action that publishes videos, photos, text and PDFs to TikTok, YouTube, Instagram, Facebook, X, Threads,
-LinkedIn, Pinterest, Bluesky, Reddit, Mastodon, Discord, Telegram, Slack and 8 more networks with
+LinkedIn, Pinterest, Bluesky, Reddit, Mastodon, Discord, Telegram, Slack and more with
 [Reelspan](https://reelspan.com). Announce releases, ship demo videos, post changelog cards.
 
 ```yaml
