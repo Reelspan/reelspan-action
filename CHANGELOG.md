@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Built with the latest Reelspan SDK, which drops Whop, Listmonk, Nostr and Lemmy.
+
 ## 1.0.0
 
 First release.

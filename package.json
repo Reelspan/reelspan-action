@@ -1,6 +1,6 @@
 {
   "name": "reelspan-action",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "GitHub Action: publish to every major social network with Reelspan.",
   "license": "MIT",
@@ -15,7 +15,7 @@
   "devDependencies": {
     "@types/node": "^20.19.0",
     "esbuild": "^0.25.0",
-    "reelspan": "github:Reelspan/reelspan-node#cc5ceabe0aa3dd633b546f6a0a2132c4efded09f",
+    "reelspan": "github:Reelspan/reelspan-node#e32bf2dd9e79f51d582e65954093fd2a4952e299",
     "typescript": "^5.9.0"
   }
 }

@@ -4,7 +4,7 @@ import { basename, extname, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
 
 // node_modules/reelspan/dist/index.js
-var VERSION = "1.0.0";
+var VERSION = "1.0.1";
 var ReelspanError = class extends Error {
   status;
   code;
@@ -181,7 +181,7 @@ var Reelspan = class {
   accounts = {
     /**
      * Connects a network that uses credentials instead of an OAuth sign-in (Telegram, Discord, Slack, Mastodon,
-     * WordPress, Dev.to, Hashnode, Lemmy, Listmonk, Whop, Nostr, Bluesky). The fields are checked with the network
+     * WordPress, Dev.to, Hashnode, Bluesky). The fields are checked with the network
      * first. Upload-Post's field names work too, e.g. `{ chat_id }`, `{ instance_url, access_token }`.
      */
     connect: (username, platform, credentials) => this.request("POST", `/v1/accounts/${enc(platform)}`, { json: { profile_username: username, ...credentials } }),
